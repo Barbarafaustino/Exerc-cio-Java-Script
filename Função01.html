@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        function calcularArea (largura, comprimento){
+            var area = largura * comprimento;
+            document.write('A área é de' + area + 'metros quadrados');
+        }
+
+        calcularArea (10, 40)
+
+        function calcularArea (largura, comprimento){
+            var area = largura * comprimento;
+            return area;
+        }
+
+        var area = calcularArea (prompt('Digite a largura:'), prompt('Digite a comprimento:'));
+        document.write('A área é de' + area + 'metros quadrados');
+    </script>
+</body>
+</html>
