@@ -1,58 +1,35 @@
-<!doctype html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <title>Separar Letras e Números</title>
-  <style>
-    body { font-family: system-ui, Arial, sans-serif; max-width: 720px; margin: 24px auto; }
-    label { display:block; margin: 8px 0 4px; }
-    input { width: 100%; padding: 10px; font-size: 16px; }
-    small { color:#555; }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manipulando Input - JS</title>
+    <script>
+        function selecionarCaracter(){
+            var caracter = document.getElementById('entrada').value;
+
+      // Pega apenas o último caractere digitado
+        var ultimo = caracter.slice(-1);
+
+      if (/[0-9]/.test(ultimo)) { 
+        document.getElementById('saidaNumero').value += ultimo;
+      } 
+      else if (/[a-zA-Z]/.test(ultimo)) { 
+        document.getElementById('saidaLetra').value += ultimo;
+      }
+     }
+    </script>
 </head>
 <body>
-  <h1>Separar letras e números</h1>
+    <label>Entrada:</label>
+    <input type="text" id="entrada" onkeyup="selecionarCaracter()" placeholder="Digite um caractere">
 
-  <label for="src">Digite aqui (qualquer texto)</label>
-  <input id="src" type="text" placeholder="Ex.: aBç123@# xyz" autocomplete="off" />
+  <hr>
 
-  <label for="letters">Somente letras</label>
-  <input id="letters" type="text" readonly />
+    <label>Somente Letras:</label>
+    <input type="text" id="saidaLetra" disabled>
 
-  <label for="numbers">Somente números</label>
-  <input id="numbers" type="text" readonly />
-
-  <p><small>Observação: caracteres que não são letras nem números (ex.: @, #, espaço) são ignorados.</small></p>
-
-  <script>
-    // Referências aos elementos
-    console.log = document.getElementById('src');
-    console.log = document.getElementById('letters');
-    console.log = document.getElementById('numbers');
-
-    // Função que separa letras e números (com suporte a acentuação)
-    function splitAndTransfer(text) {
-      let letters = '';
-      let numbers = '';
-
-      // Itera por code points (suporta emojis e caracteres acentuados)
-      for (const ch of [...text]) {
-        if (/\p{L}/u.test(ch)) {        // \p{L} = qualquer letra Unicode
-          letters += ch;
-        } else if (/\d/.test(ch)) {      // \d = dígitos [0-9]
-          numbers += ch;
-        }
-        // outros caracteres são ignorados (espaços, pontuação etc.)
-      }
-
-      lettersOut.value = letters;
-      numbersOut.value = numbers;
-    }
-
-    // Atualiza em tempo real ao digitar/colar
-    src.addEventListener('input', (e) => {
-      splitAndTransfer(e.target.value);
-    });
-  </script>
+    <label>Somente Números:</label>
+    <input type="text" id="saidaNumero" disabled>
 </body>
 </html>
