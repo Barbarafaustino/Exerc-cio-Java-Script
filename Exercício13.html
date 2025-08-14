@@ -11,13 +11,15 @@
       // Pega apenas o último caractere digitado
         var ultimo = caracter.slice(-1);
 
-      if (/[0-9]/.test(ultimo)) { 
-        document.getElementById('saidaNumero').value += ultimo;
+      if(caracter == '0' ||caracter == '1' || caracter == '2' ||caracter == '3' ||caracter == '4' ||caracter == '5' ||caracter == '6' ||caracter == '7' ||caracter == '8' || caracter == '9' ||){ 
+        document.getElementById('numero').value = ultimo;
+        document.getElementById('entrada').value = ultimo;
       } 
-      else if (/[a-zA-Z]/.test(ultimo)) { 
-        document.getElementById('saidaLetra').value += ultimo;
+      else{
+        document.getElementById('letra').value = ultimo;
+        document.getElementById('entrada').value = ultimo;
       }
-     }
+     
     </script>
 </head>
 <body>
