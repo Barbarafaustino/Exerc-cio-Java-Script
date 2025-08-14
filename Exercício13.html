@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <title>Separar Letras e Números</title>
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; max-width: 720px; margin: 24px auto; }
+    label { display:block; margin: 8px 0 4px; }
+    input { width: 100%; padding: 10px; font-size: 16px; }
+    small { color:#555; }
+  </style>
+</head>
+<body>
+  <h1>Separar letras e números</h1>
+
+  <label for="src">Digite aqui (qualquer texto)</label>
+  <input id="src" type="text" placeholder="Ex.: aBç123@# xyz" autocomplete="off" />
+
+  <label for="letters">Somente letras</label>
+  <input id="letters" type="text" readonly />
+
+  <label for="numbers">Somente números</label>
+  <input id="numbers" type="text" readonly />
+
+  <p><small>Observação: caracteres que não são letras nem números (ex.: @, #, espaço) são ignorados.</small></p>
+
+  <script>
+    // Referências aos elementos
+    console.log = document.getElementById('src');
+    console.log = document.getElementById('letters');
+    console.log = document.getElementById('numbers');
+
+    // Função que separa letras e números (com suporte a acentuação)
+    function splitAndTransfer(text) {
+      let letters = '';
+      let numbers = '';
+
+      // Itera por code points (suporta emojis e caracteres acentuados)
+      for (const ch of [...text]) {
+        if (/\p{L}/u.test(ch)) {        // \p{L} = qualquer letra Unicode
+          letters += ch;
+        } else if (/\d/.test(ch)) {      // \d = dígitos [0-9]
+          numbers += ch;
+        }
+        // outros caracteres são ignorados (espaços, pontuação etc.)
+      }
+
+      lettersOut.value = letters;
+      numbersOut.value = numbers;
+    }
+
+    // Atualiza em tempo real ao digitar/colar
+    src.addEventListener('input', (e) => {
+      splitAndTransfer(e.target.value);
+    });
+  </script>
+</body>
+</html>
